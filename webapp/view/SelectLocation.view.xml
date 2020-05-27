@@ -1,0 +1,6 @@
+<mvc:View	xmlns:mvc="sap.ui.core.mvc" 
+			xmlns="sap.m" 
+			controllerName="WSR.WorkspaceReservation.controller.SelectLocation" 
+			displayBlock="true">
+	
+</mvs:view>
