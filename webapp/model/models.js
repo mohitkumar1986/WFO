@@ -19,6 +19,38 @@ sap.ui.define([
 			var oModel = new JSONModel(oFlags);
 			return oModel;
 		},
+		createLocationModel: function (componentRef) {
+			
+			var url = "https://bookercrud.azurewebsites.net/api/locations";
+			/*var oModel = new sap.ui.model.json.JSONModel();
+			$.ajax({
+				url			:url,
+				jsonCallback:'getJSON',
+				contentType	:"application/json",
+				datatype	:'jsonnp',
+				success : function(data, textStatus, jqXHR) {
+					oModel.setData(data);
+					componentRef.setModel(oModel,"locations");
+				}
+			});*/
+			
+    		// fire the XHR request
+	    	var xhttp = new XMLHttpRequest();	
+			xhttp.onreadystatechange = function() {
+	 
+	    	// 4 means request is finished and response is ready
+	    	// 200 means ok
+	    	if (this.readyState === 4 && this.status === 200) {
+	        // this refers here to the XHR object
+	        	//sap.base.Log.info(this.responseText);
+	        	var oData = JSON.parse(this.responseText);
+	        	var oModel = new JSONModel(oData);
+	    		componentRef.setModel(oModel,"locations");
+	    	}};
+	    			// set the XHR request parameters
+	    		xhttp.open("GET",url, true);
+	    		xhttp.send();
+    	},
 		createMockModel: function (){
 			var oData = {
 			reservations : [
@@ -94,6 +126,7 @@ sap.ui.define([
 				}
 			]	
 			};
+
 			var oModel = new JSONModel(oData);
 			return oModel;	
 			
