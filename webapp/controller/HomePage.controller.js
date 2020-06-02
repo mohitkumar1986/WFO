@@ -2,10 +2,11 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/m/MessageToast",
 	"sap/ui/model/json/JSONModel"
-], function (Controller,MessageToast,JSONModel) {
+], function (Controller, MessageToast, JSONModel) {
 	"use strict";
 
 	return Controller.extend("WSR.WorkspaceReservation.controller.View1", {
+
 		onInit: function () {
 			/* This code was causing issues as the view was being instantiated again with
 				duplicate ID 
@@ -33,11 +34,12 @@ sap.ui.define([
 		},
 		onPressNext: function () {
 			var oBinding = this.byId("myList").getBinding("items");
-			oBinding.filter(new sap.ui.model.Filter("week", "EQ", "Week2")); 
-		} ,
+		//	MessageToast.show("oBinding " + oBinding);
+			oBinding.filter(new sap.ui.model.Filter("week", "EQ", "Week2"));
+		},
 		onPressPrevious: function () {
 			var oBinding = this.byId("myList").getBinding("items");
-			oBinding.filter(new sap.ui.model.Filter("week", "EQ", "Week1")); 
+			oBinding.filter(new sap.ui.model.Filter("week", "EQ", "Week1"));
 		}
 	});
 });
