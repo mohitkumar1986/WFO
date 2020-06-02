@@ -9,8 +9,17 @@ sap.ui.define([
 	return Controller.extend("WSR.WorkspaceReservation.controller.View1", {
 		formatter: formatter,
 		onInit: function () {
+			/* This code was causing issues as the view was being instantiated again with
+				duplicate ID 
+				Now on load the list is not filtered but when user presses next/last week it IS filtered*/
 			var oBinding = this.byId("myList").getBinding("items");
 			oBinding.filter(new sap.ui.model.Filter("week", "EQ", "1"));
+		},
+        onSelectLocationButton: function () {
+			//	var sRecipient = this.getView().getModel().getProperty("/recipient");
+			//	MessageToast.show("sRecipient "+ sRecipient);
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("RouteView2");
 		},
 		onShowHello : function () {
 			MessageToast.show("Dialog to Search Locations");
