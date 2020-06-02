@@ -32,13 +32,13 @@
 									</items>
 								</Select>
 								<Label text="{i18n>FLOOR}"/>
-								<Select id="floor" enabled="{/FloorEnabled}" change="onFloorSelected" selectedKey="{Floor1}" items="{ path: 'mock>/locations' }">
+								<Select id="floor" enabled="{/FloorEnabled}" change="onFloorSelected" items="{ path: 'mock>/locations' }">
 									<items>
 										<core:Item text="{mock>floor}" key="{mock>floor}"/>
 									</items>
 								</Select>
 								<Label text="{i18n>DESK}"/>
-								<Select id="desk" enabled="{/DeskEnabled}" selectedKey="{Desk1}" items="{ path: 'mock>/locations' }">
+								<Select id="desk" enabled="{/DeskEnabled}" change="onDeskSelected" items="{ path: 'mock>/locations' }">
 									<items>
 										<core:Item text="{mock>desk}" key="{mock>desk}"/>
 									</items>
