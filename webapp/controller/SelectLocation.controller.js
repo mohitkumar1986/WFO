@@ -1,54 +1,130 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:s="sap.sports.ui.controls" xmlns:core="sap.ui.core"
-	controllerName="WSR.WorkspaceReservation.controller.SelectLocation" displayBlock="true">
-	<Shell id="shell">
-		<App id="app">
-			<pages>
-				<Page id="page" title="{i18n>title}" titleLevel="H6" tooltip="Web App for Reserving your Seat in Office" showNavButton="true"
-					navButtonPress="onNavBack">
-					<headerContent>
-						<Image src="/webapp/Images/wstr.jpg" width="170px" height="140px" id="image0"/>
-					</headerContent>
-					<content>
-						<f:SimpleForm id="SimpleFormChange354" editable="true" layout="ResponsiveGridLayout" title="Select Location" labelSpanXL="3" labelSpanL="3"
-							labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1"
-							columnsL="1" columnsM="1" singleContainerFullSize="false">
-							<f:content>
-								<Label text="{i18n>COUNTRY}"/>
-								<Select id="country" change="onCountrySelected" items="{ path: 'mock>/locations' }">
-									<items>
-										<core:Item text="{mock>country}" key="{mock>country}"/>
-									</items>
-								</Select>
-								<Label text="{i18n>CITY}"/>
-								<Select id="city" enabled="{/CityEnabled}" change="onCitySelected" items="{ path: 'mock>/locations' }">
-									<items>
-										<core:Item text="{mock>city}" key="{mock>city}"/>
-									</items>
-								</Select>
-								<Label text="{i18n>BUILDING}"/>
-								<Select id="building" enabled="{/BuildingEnabled}" change="onBuildingSelected" items="{ path: 'mock>/locations' }">
-									<items>
-										<core:Item text="{mock>building}" key="{mock>building}" class="sapUiResponsiveMargin"/>
-									</items>
-								</Select>
-								<Label text="{i18n>FLOOR}"/>
-								<Select id="floor" enabled="{/FloorEnabled}" change="onFloorSelected" items="{ path: 'mock>/locations' }">
-									<items>
-										<core:Item text="{mock>floor}" key="{mock>floor}"/>
-									</items>
-								</Select>
-								<Label text="{i18n>DESK}"/>
-								<Select id="desk" enabled="{/DeskEnabled}" change="onDeskSelected" items="{ path: 'mock>/locations' }">
-									<items>
-										<core:Item text="{mock>desk}" key="{mock>desk}"/>
-									</items>
-								</Select>
-							</f:content>
-							<Button text="{i18n>SELECTLOCATION}" class="sapUiResponsiveMargin" width="60%" press="selectLocation"/>
-						</f:SimpleForm>
-					</content>
-				</Page>
-			</pages>
-		</App>
-	</Shell>
-</mvc:View>
+sap.ui.define([
+	"sap/ui/core/mvc/Controller",
+	"sap/m/MessageToast",
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
+	"sap/ui/core/routing/History"
+], function (Controller, MessageToast, JSONModel, Filter, FilterOperator, History) {
+	"use strict";
+
+	return Controller.extend("WSR.WorkspaceReservation.controller.SelectLocation", {
+		onInit: function () {
+
+			// set data model on view
+			var oData = {
+				"CityEnabled": false,
+				"BuildingEnabled": false,
+				"DeskEnabled": false,
+				"FloorEnabled": false,
+				"SelectedDesk": ""
+
+			};
+			var oModel = new JSONModel(oData);
+
+
+
+			this.getView().setModel(oModel);
+		
+		},
+
+		onCountrySelected: function (oEvent) {
+
+			//Toggle City enabled
+			var oModel = this.getView().getModel(),
+				oData = oModel.getData();
+
+			oData.CityEnabled = !oData.CityEnabled;
+			oModel.setData(oData);
+		//	MessageToast.show("country: : " + oData.country);
+		//	var oBinding = this.byId("city").getBinding("items");
+		//	oBinding.filter(new sap.ui.model.Filter("country", "EQ", oData.country));
+
+			// build filter array
+		//	var aFilter = [];
+	//		var sQuery = oEvent.getParameter("query");
+
+		//	if (sQuery) {
+		//		//		MessageToast.show("if (sQuery) ");
+		//		aFilter.push(new Filter("country", FilterOperator.Contains, sQuery));
+		//	}
+
+			// filter binding
+			//var oList = this.getView().byId("city"); //want to filter the city based on country
+		//	MessageToast.show("oList: " + oList);
+			//oList: Element sap.m.Select#container-WorkspaceReservation---SelectLocation--city
+			//	var oBinding = oList.getBinding("items");
+			//	MessageToast.show("oBinding: " + oBinding);
+			//MessageToast.show("aFilter: " + aFilter);
+		//	oBinding.filter(aFilter);
+
+		},
+
+		onCitySelected: function (oEvent) {
+
+			//Toggle building enabled
+			var oModel = this.getView().getModel(),
+				oData = oModel.getData();
+
+			oData.BuildingEnabled = !oData.BuildingEnabled;
+			oModel.setData(oData);
+		},
+		onBuildingSelected: function (oEvent) {
+
+			//Toggle floor enabled
+			var oModel = this.getView().getModel(),
+				oData = oModel.getData();
+
+			oData.FloorEnabled = !oData.FloorEnabled;
+			oModel.setData(oData);
+		},
+		onFloorSelected: function (oEvent) {
+
+			//Toggle desk enabled
+			var oModel = this.getView().getModel(),
+				oData = oModel.getData();
+			oData.DeskEnabled = !oData.DeskEnabled;
+			oModel.setData(oData);
+		},
+		
+		onDeskSelected: function (oEvent) {
+		
+		var b = "";
+        b = oEvent.getParameter("selectedItem").getKey();
+        MessageToast.show("selectedDesk: " + b);
+        
+			//Toggle desk enabled
+			//var oModel = this.getView().getModel(),
+		//		oData = oModel.getData();
+
+		//	oModel.setData(oData);
+		},
+		
+
+
+		selectLocation: function () {
+
+			//	var sRecipient = this.getView().getModel().getProperty("/recipient");
+			//	MessageToast.show("sRecipient: " + sRecipient);
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("RouteView1");
+
+		},
+
+		onNavBack: function () {
+		//	MessageToast.show("Back Button Clicked");
+
+			//var oHistory = History.getInstance();
+			//	MessageToast.show("oHistory: " + oHistory);
+			//	var sPreviousHash = oHistory.getPreviousHash();
+			//		MessageToast.show("sPreviousHash: " + sPreviousHash);
+
+			//	if (sPreviousHash !== undefined) {
+			//		window.history.go(-1);
+			//	} else {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("RouteView1");
+			//	}
+		}
+	});
+});
