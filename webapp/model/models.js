@@ -123,8 +123,40 @@ sap.ui.define([
 					status: "Unavailable",
 					week:		"Week2"
 					
-				}
-			]	
+				}],
+				"locations": [{
+					country: "Ireland",
+					city: "Dublin",
+					building: "Waterside",
+					floor: "First",
+					desk: "1.03"
+				}, {
+					country: "Ireland",
+					city: "Dublin",
+					building: "Kingswood",
+					floor: "Second",
+					desk: "2.02"
+				}, {
+					country: "Germany",
+					city: "Walldorf",
+					building: "Building X",
+					floor: "Fifth",
+					desk: "5.01"
+				}, {
+					country: "Ireland",
+					city: "Galway",
+					building: "Emer",
+					floor: "Second",
+					desk: "2.03"
+				}, {
+					country: "Ireland",
+					city: "Galway",
+					building: "Cliona",
+					floor: "First",
+					desk: "1.03"
+				}]
+				
+		
 			};
 
 			var oModel = new JSONModel(oData);
