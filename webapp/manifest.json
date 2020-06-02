@@ -37,7 +37,7 @@
 		"rootView": {
 			"viewName": "WSR.WorkspaceReservation.view.HomePage",
 			"type": "XML",
-			"async": true,
+			"async": true
 		},
 		"dependencies": {
 			"minUI5Version": "1.65.6",
