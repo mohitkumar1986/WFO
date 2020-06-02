@@ -28,6 +28,9 @@ sap.ui.define([
 			this.setModel(models.createMockModel(), "mock");
 			this.setModel(models.createGlobalData(), "global");
 			models.createLocationModel(this);
+			
+
+			
 		}
 	});
 });

@@ -22,7 +22,7 @@
 							<Button	text="{i18n>locationButtonText}" 
 									class="sapUiResponsiveMargin"
 									width="60%"
-									press="onShowHello"/>
+									press="onSelectLocationButton"/>
 							<Button	text="{i18n>nextWeekButtonText}" 
 									class="sapUiResponsiveMargin"
 									width="10%"
