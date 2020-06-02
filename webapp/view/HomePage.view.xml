@@ -6,7 +6,7 @@
 		<App id="app">
 			<pages>
 				<Page	id="page" 
-						title="({i18n>title})+test" titleAlignment="Center" titleLevel="H6"
+						title="({i18n>title})" titleAlignment="Center" titleLevel="H6"
 						tooltip="Web App for Reserving your Seat in Office">
 					<headerContent>
 				    	<Image src="/webapp/Images/wstr.jpg" width="170px" height="140px" id="image0"/>
@@ -31,85 +31,24 @@
 							<List	id		="myList"
 									mode	="MultiSelect"
 									class	="sapUiResponsiceMargin"
+									selectionChange = "onSelectionChange"
 									items	="{
-													path: 'mock>/reservations'
+													path: 'screenMock>/screenReservation'
 											  }">
 								<items>
-									<StandardListItem	title="{mock>day}"
-														description="{mock>colleagues}"
+									<StandardListItem	title="{
+																	path: 'screenMock>day',
+																	formatter: '.formatter.displayDate'
+																}"
+														description="{screenMock>colleagues}"
 														icon="sap-icon://available"
 														iconInset="false"
 														highlight="None"
-														info="Not Reserved"
-														infoState="None"
+														info="{screenMock>status}"
+														infoState="Success"
 														class="sapUiResponsiveMargin"/>
 								</items>
 							</List>
-<!--<List
-							id="myList"
-							mode="MultiSelect"
-							class="sapUiResponsiceMargin">
-							<items>
-								<StandardListItem
-									title="Monday 25th May 2020"
-									description="Colleagues Reservations: Mohit KUmar / Cristian Petrache"
-									icon="sap-icon://available"
-									iconInset="false"
-									highlight="None"
-									info="Not Reserved"
-									infoState="None"
-									infoStateInverted="true"
-									class="sapUiResponsiveMargin"/>
-							</items>
-							<items>
-								<StandardListItem
-									title="Tuesday 26th May 2020"
-									description="Colleagues Reservations: Katie Bebbington / Cristian Petrache"
-									icon="sap-icon://available"
-									iconInset="false"
-									highlight="Success"
-									info="Reserved"
-									infoState="Success"
-									infoStateInverted="true"
-									class="sapUiResponsiveMargin"/>
-							</items>
-							<items>
-								<StandardListItem
-									title="Wednesday 27th May 2020"
-									description="Colleagues Reservations: Katie Bebbington / Cristian Petrache"
-									icon="sap-icon://accept"
-									iconInset="false"
-									highlight="Success"
-									info="Reserved"
-									infoState="Success"
-									infoStateInverted="true"
-									class="sapUiResponsiveMargin"/>
-							</items>
-							<items>
-								<StandardListItem
-									title="Thursday 28th May 2020"
-									description="Colleagues Reservations: Katie Bebbington / Mohit Kumar / Shweta Kaushal"
-									icon="sap-icon://reject"
-									iconInset="false"
-									highlight="Error"
-									info="Not Available"
-									infoState="Error"
-									infoStateInverted="true"
-									class="sapUiResponsiveMargin"/>
-							</items>
-							<items>
-								<StandardListItem
-									title="Friday 29th May 2020"
-									description="Colleagues Reservations: ABC anderson / Johny Bravo / Gordon Freeman / Nathan Drake / Kratos / Bruce Banner / Tony Stark"
-									icon="sap-icon://reject"
-									iconInset="false"
-									highlight="Error"
-									info="Not Available"
-									infoState="Error"
-									infoStateInverted="true"
-									class="sapUiResponsiveMargin"/>
-							</items>						
-						</List>				-->	
 					</content>
 				</Page>
 			</pages>
