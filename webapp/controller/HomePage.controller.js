@@ -27,16 +27,6 @@ sap.ui.define([
 		//	MessageToast.show("oBinding " + oBinding);
 			oBinding.filter(new sap.ui.model.Filter("week", "EQ", "Week2"));
 		},
-		onPressNext: function () {
-			var oBinding = this.byId("myList").getBinding("items");
-		//	MessageToast.show("oBinding " + oBinding);
-			oBinding.filter(new sap.ui.model.Filter("week", "EQ", "Week2"));
-		},
-		onPressNext: function () {
-			var oBinding = this.byId("myList").getBinding("items");
-		//	MessageToast.show("oBinding " + oBinding);
-			oBinding.filter(new sap.ui.model.Filter("week", "EQ", "Week2"));
-		},
 		onPressPrevious: function () {
 			var oBinding = this.byId("myList").getBinding("items");
 			oBinding.filter(new sap.ui.model.Filter("week", "EQ", "Week1"));
