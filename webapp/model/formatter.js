@@ -1,6 +1,18 @@
 sap.ui.define([], function() {
 	"use strict";
 	return {
+		infoState: function (status) {
+			switch (status){
+				case "Reserved":
+				return "Success";
+				case "Not Reserved":
+				return "Information";
+				case "Not Available":
+				return "Error";
+				default:
+				return "Information";
+			}	
+		},
 		displayDate: function (date) {
 			var day = date.slice(8,10);
 			var month = date.slice(5,7);
