@@ -19,153 +19,26 @@ sap.ui.define([
 			var oModel = new JSONModel(oFlags);
 			return oModel;
 		},
-		createLocationModel: function (componentRef) {
+		createLocationModel: function (component) {
 			
 			var baseurl = "https://bookercrud.azurewebsites.net/api/masterdata";
-
-			/*var oModel = new sap.ui.model.json.JSONModel();
-			$.ajax({
-				url			:url,
-				jsonCallback:'getJSON',
-				contentType	:"application/json",
-				datatype	:'jsonnp',
-				success : function(data, textStatus, jqXHR) {
-					oModel.setData(data);
-					componentRef.setModel(oModel,"locations");
-				}
-			});*/
-			
     		// fire the XHR request
 	    	var xhttp = new XMLHttpRequest();	
-			xhttp.onreadystatechange = function() {
-	 
-	    	// 4 means request is finished and response is ready
-	    	// 200 means ok
-	    	if (this.readyState === 4 && this.status === 200) {
-	        // this refers here to the XHR object
-	        	//sap.base.Log.info(this.responseText);
-	        	var oData = JSON.parse(this.responseText);
-	        	var oModel = new JSONModel(oData);
-	    		componentRef.setModel(oModel,"locations");
-	    	}};
-	    			// set the XHR request parameters
-	    		xhttp.open("GET",baseurl, true);
-	    		xhttp.send();
-    	},
-		createMockModel: function (){
-			var oData = {
-			reservations : [
-				{
-					day :		"Monday 25th May 2020",
-					colleagues: "Colleagues Reservations: Mohit KUmar / Cristian Petrache",
-					status: 	"None",
-					week:		"Week1"
-					
-				},
-				{
-					day : "Tuesday 26th May 2020",
-					colleagues: "Colleagues Reservations: Katie Bebbington / Cristian Petrache",
-					status: "Reserved",
-					week:		"Week1"
-					
-				},
-				{
-					day : "Wednesday 27th May 2020",
-					colleagues: "Colleagues Reservations: Katie Bebbington / Cristian Petrache",
-					status: "None",
-					week:		"Week1"
-					
-				},
-				{
-					day : "Thursday 28th May 2020",
-					colleagues: "Colleagues Reservations: Katie Bebbington / Mohit Kumar / Shweta Kaushal",
-					status: "Unavailable",
-					week:		"Week1"
-					
-				},
-				{
-					day : "Friday 29th May 2020",
-					colleagues: "Colleagues Reservations: ABC anderson / Johny Bravo / Gordon Freeman / Nathan Drake / Kratos / Bruce Banner / Tony Stark",
-					status: "Unavailable",
-					week:		"Week1"
-					
-				},
-				{
-					day :		"Monday 1st June 2020",
-					colleagues: "Colleagues Reservations: MK / CP",
-					status: 	"None",
-					week:		"Week2"
-					
-				},
-				{
-					day : "Tuesday 2nd June 2020",
-					colleagues: "Colleagues Reservations: KB / CP",
-					status: "Reserved",
-					week:		"Week2"
-					
-				},
-				{
-					day : "Wednesday 3rd June 2020",
-					colleagues: "Colleagues Reservations: KB / CP",
-					status: "None",
-					week:		"Week2"
-					
-				},
-				{
-					day : "Thursday 4th June 2020",
-					colleagues: "Colleagues Reservations: KB / MK / SK",
-					status: "Unavailable",
-					week:		"Week2"
-					
-				},
-				{
-					day : "Friday 5th June 2020",
-					colleagues: "Colleagues Reservations: Tom Jennings / ABS / GF / ND / Bruce Banner / Tony Stark",
-					status: "Unavailable",
-					week:		"Week2"
-					
-				}],
-				"locations": [{
-					country: "Ireland",
-					city: "Dublin",
-					building: "Waterside",
-					floor: "First",
-					desk: "1.03"
-				}, {
-					country: "Ireland",
-					city: "Dublin",
-					building: "Kingswood",
-					floor: "Second",
-					desk: "2.02"
-				}, {
-					country: "Germany",
-					city: "Walldorf",
-					building: "Building X",
-					floor: "Fifth",
-					desk: "5.01"
-				}, {
-					country: "Ireland",
-					city: "Galway",
-					building: "Emer",
-					floor: "Second",
-					desk: "2.03"
-				}, {
-					country: "Ireland",
-					city: "Galway",
-					building: "Cliona",
-					floor: "First",
-					desk: "1.03"
-				}]
-				
 		
-			};
-
-			var oModel = new JSONModel(oData);
-			return oModel;	
-			
-		},
-		createJSONMock: function () 
-		{	var d = new Date();
+			// set the XHR request parameters
+	    	xhttp.open("GET",baseurl, false);
+	    	xhttp.send();
+			if (xhttp.readyState === 4 && xhttp.status === 200) 
+	    	{
+	        	var oData = JSON.parse(xhttp.responseText);
+	        	var oModel = new JSONModel(oData);
+	        	this.setLocationIndividualModels(oData,component);
+	        	return oModel;
+	    	}	    		
+    	},
+		createJSONMock: function (component) 
+		{	
+			var d = new Date();
             d = this.getMonday(d);
             var edate = this.addDays(d,30);
             var fromDate = this.getFormattedDate(d);
@@ -183,16 +56,13 @@ sap.ui.define([
 	    	if (xhttp.readyState === 4 && xhttp.status === 200) 
 	    	{
 	        	oData = {userReservations: JSON.parse(xhttp.responseText)};
-	        			
-	        	//var oModel = new JSONModel(oData);
-				
 	    	}
             var screenReservation = [];
             var dt,lv_status,lv_colleagues;
             var lv_res = oData.userReservations.reservations;
             var lv_team_res = oData.userReservations.teamReservations;
 			var week = 1;
-//Loop to read reservation data and match the same
+			//Loop to read reservation data and match the same
             for(var i=0;i<30;i++)
             {	
             	dt=this.getFormattedDate(d);
@@ -265,6 +135,42 @@ sap.ui.define([
             this.colleagues = colleagues;
             this.week = week;
             return this;
+        },
+        setLocationIndividualModels: function(oData,component){
+        	var lv_loc=[];
+        	var lv_bld=[];
+        	var lv_flr=[];
+        	var lv_st=[];
+        	for(var loc in oData.locations){
+        		lv_loc.push(oData.locations[loc]);
+        		var buildings = oData.locations[loc].buildings;
+        		for(var bld in buildings){
+        			var n_bld = buildings[bld];
+        			n_bld.lid = oData.locations[loc].id;
+        			lv_bld.push(n_bld);
+        			
+        			var floors = buildings[bld].floors;
+        			for(var flr in floors){
+        				var n_flr = floors[flr];
+        				n_flr.bid = buildings[bld].id;
+        				lv_flr.push(floors[flr]);
+        				var seats = floors[flr].seats;
+        				for(var st in seats){
+        					var n_sts = seats[st];
+        					n_sts.fid = floors[flr].id;
+        					lv_st.push(seats[st]);
+        				}
+        			}
+        		}
+        	}
+        	var JSON_loc = new JSONModel(lv_loc);
+        	var JSON_bld = new JSONModel(lv_bld);
+        	var JSON_flr = new JSONModel(lv_flr);
+        	var JSON_st = new JSONModel(lv_st);
+        	component.setModel(JSON_loc,"city");
+        	component.setModel(JSON_bld,"buildings");
+        	component.setModel(JSON_flr,"floors");
+        	component.setModel(JSON_st,"seats");
         }
 	};
 });

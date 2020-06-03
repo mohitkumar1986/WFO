@@ -12,11 +12,11 @@ sap.ui.define([
 		onInit: function () {
 			/* This code was causing issues as the view was being instantiated again with
 				duplicate ID 
-				Now on load the list is not filtered but when user presses next/last week it IS filtered*/
+				Now on load the list is not filtered but when user presses next/last week it IS filtered
 			var oBinding = this.byId("myList").getBinding("items");
 			if(oBinding!==undefined){
 				oBinding.filter(new sap.ui.model.Filter("week", "EQ", "1"));	
-			}
+			}*/
 		},
 		onBeforeRendering: function(){
 			var oBinding = this.byId("myList").getBinding("items");

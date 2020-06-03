@@ -18,16 +18,29 @@ sap.ui.define([
 				"DeskEnabled": false,
 				"FloorEnabled": false,
 				"SelectedDesk": ""
-
 			};
 			var oModel = new JSONModel(oData);
-
-
-
-			this.getView().setModel(oModel);
+			this.getView().setModel(oModel,"flags");
 		
 		},
-
+		onAfterRendering: function(){
+			/*var oLocations = JSON.parse(this.getOwnerComponent().getModel("city").getJSON());
+			var oBuildings = JSON.parse(this.getOwnerComponent().getModel("buildings").getJSON());
+			var oFloors = JSON.parse(this.getOwnerComponent().getModel("floors").getJSON());
+			var oSeats = JSON.parse(this.getOwnerComponent().getModel("seats").getJSON());*/
+			var oSelectedCity = this.byId("city").getSelectedItem().getKey();
+			var oSelectedBld = this.byId("buildings").getSelectedItem().getKey();
+			var oSelectedflr = this.byId("floors").getSelectedItem().getKey();
+			
+			//var ocity_bnd = this.byId("city").getBinding("items");
+			var obld_bnd = this.byId("buildings").getBinding("items");
+			var oflr_bnd = this.byId("floors").getBinding("items");
+			var ost_bnd = this.byId("seats").getBinding("items");
+			obld_bnd.filter(new sap.ui.model.Filter("lid","EQ",oSelectedCity));
+			oflr_bnd.filter(new sap.ui.model.Filter("bid","EQ",oSelectedBld));
+			ost_bnd.filter(new sap.ui.model.Filter("fid","EQ",oSelectedflr));
+			
+		},
 		onCountrySelected: function (oEvent) {
 
 			//Toggle City enabled
@@ -36,61 +49,56 @@ sap.ui.define([
 
 			oData.CityEnabled = !oData.CityEnabled;
 			oModel.setData(oData);
-		//	MessageToast.show("country: : " + oData.country);
-		//	var oBinding = this.byId("city").getBinding("items");
-		//	oBinding.filter(new sap.ui.model.Filter("country", "EQ", oData.country));
-
-			// build filter array
-		//	var aFilter = [];
-	//		var sQuery = oEvent.getParameter("query");
-
-		//	if (sQuery) {
-		//		//		MessageToast.show("if (sQuery) ");
-		//		aFilter.push(new Filter("country", FilterOperator.Contains, sQuery));
-		//	}
-
-			// filter binding
-			//var oList = this.getView().byId("city"); //want to filter the city based on country
-		//	MessageToast.show("oList: " + oList);
-			//oList: Element sap.m.Select#container-WorkspaceReservation---SelectLocation--city
-			//	var oBinding = oList.getBinding("items");
-			//	MessageToast.show("oBinding: " + oBinding);
-			//MessageToast.show("aFilter: " + aFilter);
-		//	oBinding.filter(aFilter);
 
 		},
 
 		onCitySelected: function (oEvent) {
 
-			//Toggle building enabled
-			var oModel = this.getView().getModel(),
-				oData = oModel.getData();
-
-			oData.BuildingEnabled = !oData.BuildingEnabled;
-			oModel.setData(oData);
+			var oSelectedCity = this.byId("city").getSelectedItem().getKey();
+			//var oSelectedBld = this.byId("buildings").getSelectedItem().getKey();
+			//var oSelectedflr = this.byId("floors").getSelectedItem().getKey();
+			
+			//var ocity_bnd = this.byId("city").getBinding("items");
+			var obld_bnd = this.byId("buildings").getBinding("items");
+			var oflr_bnd = this.byId("floors").getBinding("items");
+			var ost_bnd = this.byId("seats").getBinding("items");
+			obld_bnd.filter(new sap.ui.model.Filter("lid","EQ",oSelectedCity));
+			oflr_bnd.filter(new sap.ui.model.Filter("bid","EQ",""));
+			ost_bnd.filter(new sap.ui.model.Filter("fid","EQ",""));
 		},
 		onBuildingSelected: function (oEvent) {
 
-			//Toggle floor enabled
-			var oModel = this.getView().getModel(),
-				oData = oModel.getData();
-
-			oData.FloorEnabled = !oData.FloorEnabled;
-			oModel.setData(oData);
+			//var oSelectedCity = this.byId("city").getSelectedItem().getKey();
+			var oSelectedBld = this.byId("buildings").getSelectedItem().getKey();
+			//var oSelectedflr = this.byId("floors").getSelectedItem().getKey();
+			
+			//var ocity_bnd = this.byId("city").getBinding("items");
+			//var obld_bnd = this.byId("buildings").getBinding("items");
+			var oflr_bnd = this.byId("floors").getBinding("items");
+			var ost_bnd = this.byId("seats").getBinding("items");
+			//obld_bnd.filter(new sap.ui.model.Filter("lid","EQ",oSelectedCity));
+			oflr_bnd.filter(new sap.ui.model.Filter("bid","EQ",oSelectedBld));
+			ost_bnd.filter(new sap.ui.model.Filter("fid","EQ",""));
 		},
 		onFloorSelected: function (oEvent) {
 
-			//Toggle desk enabled
-			var oModel = this.getView().getModel(),
-				oData = oModel.getData();
-			oData.DeskEnabled = !oData.DeskEnabled;
-			oModel.setData(oData);
+			//var oSelectedCity = this.byId("city").getSelectedItem().getKey();
+			//var oSelectedBld = this.byId("buildings").getSelectedItem().getKey();
+			var oSelectedflr = this.byId("floors").getSelectedItem().getKey();
+			
+			//var ocity_bnd = this.byId("city").getBinding("items");
+			//var obld_bnd = this.byId("buildings").getBinding("items");
+			//var oflr_bnd = this.byId("floors").getBinding("items");
+			var ost_bnd = this.byId("seats").getBinding("items");
+			//obld_bnd.filter(new sap.ui.model.Filter("lid","EQ",oSelectedCity));
+			//oflr_bnd.filter(new sap.ui.model.Filter("bid","EQ",oSelectedBld));
+			ost_bnd.filter(new sap.ui.model.Filter("fid","EQ",oSelectedflr));
 		},
 		
 		onDeskSelected: function (oEvent) {
 		
 		var b = "";
-        b = oEvent.getParameter("selectedItem").getKey();
+        b = oEvent.getParameter("selectedItem").getText();
         MessageToast.show("selectedDesk: " + b);
         
 			//Toggle desk enabled

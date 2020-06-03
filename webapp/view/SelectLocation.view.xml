@@ -13,34 +13,34 @@
 							labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1"
 							columnsL="1" columnsM="1" singleContainerFullSize="false">
 							<f:content>
-								<Label text="{i18n>COUNTRY}"/>
-								<Select id="country" change="onCountrySelected" items="{ path: 'mock>/locations' }">
+								<!--<Label text="{i18n>country}"/>
+								<Select id="country" change="onCountrySelected" items="{locations>/locations}">
 									<items>
-										<core:Item text="{mock>country}" key="{mock>country}"/>
+										<core:Item text="{locations>name}" key="{locations>id}"/>
 									</items>
-								</Select>
+								</Select>-->
 								<Label text="{i18n>CITY}"/>
-								<Select id="city" enabled="{/CityEnabled}" change="onCitySelected" items="{ path: 'mock>/locations' }">
+								<Select id="city" change="onCitySelected" items="{ path: 'city>/' }">
 									<items>
-										<core:Item text="{mock>city}" key="{mock>city}"/>
+										<core:Item text="{city>name}" key="{city>id}"/>
 									</items>
 								</Select>
 								<Label text="{i18n>BUILDING}"/>
-								<Select id="building" enabled="{/BuildingEnabled}" change="onBuildingSelected" items="{ path: 'mock>/locations' }">
+								<Select id="buildings" enabled="{/BuildingEnabled}" change="onBuildingSelected" items="{ path: 'buildings>/' }">
 									<items>
-										<core:Item text="{mock>building}" key="{mock>building}" class="sapUiResponsiveMargin"/>
+										<core:Item text="{buildings>name}" key="{buildings>id}" class="sapUiResponsiveMargin"/>
 									</items>
 								</Select>
 								<Label text="{i18n>FLOOR}"/>
-								<Select id="floor" enabled="{/FloorEnabled}" change="onFloorSelected" items="{ path: 'mock>/locations' }">
+								<Select id="floors" enabled="{/FloorEnabled}" change="onFloorSelected" items="{ path: 'floors>/' }">
 									<items>
-										<core:Item text="{mock>floor}" key="{mock>floor}"/>
+										<core:Item text="{floors>name}" key="{floors>id}"/>
 									</items>
 								</Select>
 								<Label text="{i18n>DESK}"/>
-								<Select id="desk" enabled="{/DeskEnabled}" change="onDeskSelected" items="{ path: 'mock>/locations' }">
+								<Select id="seats" enabled="{/DeskEnabled}" change="onDeskSelected" items="{ path: 'seats>/' }">
 									<items>
-										<core:Item text="{mock>desk}" key="{mock>desk}"/>
+										<core:Item text="{seats>code}" key="{seats>id}"/>
 									</items>
 								</Select>
 							</f:content>

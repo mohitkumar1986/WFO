@@ -19,16 +19,14 @@ sap.ui.define([
 		init: function () {
 			// call the base component's init function
 			UIComponent.prototype.init.apply(this, arguments);
-
 			// enable routing
 			this.getRouter().initialize();
-
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
-			this.setModel(models.createMockModel(), "mock");
 			this.setModel(models.createGlobalData(), "global");
-			this.setModel(models.createJSONMock(), "screenMock");
-			models.createLocationModel(this);
+			this.setModel(models.createLocationModel(this),"locations");
+			this.setModel(models.createJSONMock(this ), "screenMock");
+			
 		}
 	});
 });
