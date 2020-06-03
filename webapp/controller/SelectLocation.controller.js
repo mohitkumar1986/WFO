@@ -43,22 +43,11 @@ sap.ui.define([
 		},
 		onCountrySelected: function (oEvent) {
 
-			//Toggle City enabled
-			var oModel = this.getView().getModel(),
-				oData = oModel.getData();
-
-			oData.CityEnabled = !oData.CityEnabled;
-			oModel.setData(oData);
-
 		},
 
 		onCitySelected: function (oEvent) {
 
 			var oSelectedCity = this.byId("city").getSelectedItem().getKey();
-			//var oSelectedBld = this.byId("buildings").getSelectedItem().getKey();
-			//var oSelectedflr = this.byId("floors").getSelectedItem().getKey();
-			
-			//var ocity_bnd = this.byId("city").getBinding("items");
 			var obld_bnd = this.byId("buildings").getBinding("items");
 			var oflr_bnd = this.byId("floors").getBinding("items");
 			var ost_bnd = this.byId("seats").getBinding("items");
@@ -68,71 +57,51 @@ sap.ui.define([
 		},
 		onBuildingSelected: function (oEvent) {
 
-			//var oSelectedCity = this.byId("city").getSelectedItem().getKey();
 			var oSelectedBld = this.byId("buildings").getSelectedItem().getKey();
-			//var oSelectedflr = this.byId("floors").getSelectedItem().getKey();
-			
-			//var ocity_bnd = this.byId("city").getBinding("items");
-			//var obld_bnd = this.byId("buildings").getBinding("items");
 			var oflr_bnd = this.byId("floors").getBinding("items");
 			var ost_bnd = this.byId("seats").getBinding("items");
-			//obld_bnd.filter(new sap.ui.model.Filter("lid","EQ",oSelectedCity));
+
 			oflr_bnd.filter(new sap.ui.model.Filter("bid","EQ",oSelectedBld));
 			ost_bnd.filter(new sap.ui.model.Filter("fid","EQ",""));
 		},
 		onFloorSelected: function (oEvent) {
 
-			//var oSelectedCity = this.byId("city").getSelectedItem().getKey();
-			//var oSelectedBld = this.byId("buildings").getSelectedItem().getKey();
 			var oSelectedflr = this.byId("floors").getSelectedItem().getKey();
-			
-			//var ocity_bnd = this.byId("city").getBinding("items");
-			//var obld_bnd = this.byId("buildings").getBinding("items");
-			//var oflr_bnd = this.byId("floors").getBinding("items");
 			var ost_bnd = this.byId("seats").getBinding("items");
-			//obld_bnd.filter(new sap.ui.model.Filter("lid","EQ",oSelectedCity));
-			//oflr_bnd.filter(new sap.ui.model.Filter("bid","EQ",oSelectedBld));
 			ost_bnd.filter(new sap.ui.model.Filter("fid","EQ",oSelectedflr));
 		},
 		
 		onDeskSelected: function (oEvent) {
 		
-		var b = "";
-        b = oEvent.getParameter("selectedItem").getText();
-        MessageToast.show("selectedDesk: " + b);
-        
-			//Toggle desk enabled
-			//var oModel = this.getView().getModel(),
-		//		oData = oModel.getData();
-
-		//	oModel.setData(oData);
+			var b = "";
+    	    b = oEvent.getParameter("selectedItem").getText();
+        	MessageToast.show("selectedDesk: " + b);
 		},
 		
 
 
 		selectLocation: function () {
-
 			//	var sRecipient = this.getView().getModel().getProperty("/recipient");
 			//	MessageToast.show("sRecipient: " + sRecipient);
-			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("RouteView1");
-
+			var oSelectedst = this.byId("seats")._getSelectedItemText();
+			var oSelectedCity = this.byId("city")._getSelectedItemText();
+			var oSelectedbld = this.byId("buildings")._getSelectedItemText();
+			var oSelectedflr = this.byId("floors")._getSelectedItemText();
+			if( oSelectedst==="" || oSelectedCity==="" || oSelectedbld==="" || oSelectedflr===""){
+				MessageToast.show("All Location fields are mandatory.");
+			}
+			else{
+				var searchButtonText = this.getOwnerComponent().getModel("global");
+				searchButtonText.currentLocation = oSelectedCity + " " + oSelectedbld + " " +  oSelectedflr + " " + oSelectedst;
+				this.getOwnerComponent().setModel(searchButtonText,"global");
+				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+				oRouter.navTo("RouteView1");
+			}
 		},
 
 		onNavBack: function () {
-		//	MessageToast.show("Back Button Clicked");
-
-			//var oHistory = History.getInstance();
-			//	MessageToast.show("oHistory: " + oHistory);
-			//	var sPreviousHash = oHistory.getPreviousHash();
-			//		MessageToast.show("sPreviousHash: " + sPreviousHash);
-
-			//	if (sPreviousHash !== undefined) {
-			//		window.history.go(-1);
-			//	} else {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("RouteView1");
-			//	}
 		}
 	});
 });

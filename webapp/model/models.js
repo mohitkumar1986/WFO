@@ -12,11 +12,10 @@ sap.ui.define([
 			return oModel;
 		},
 		createGlobalData: function() {
-			var oFlags = {
-				previousButtonActiveFlag	: "false",
-				nextButtonActiveFlag		: "true"
-			};
-			var oModel = new JSONModel(oFlags);
+
+			var oData	= {currentLocation: "Click to Search & Select Location"};
+
+			var oModel = new JSONModel(oData);
 			return oModel;
 		},
 		createLocationModel: function (component) {
@@ -61,6 +60,12 @@ sap.ui.define([
             var dt,lv_status,lv_colleagues;
             var lv_res = oData.userReservations.reservations;
             var lv_team_res = oData.userReservations.teamReservations;
+            var lv_pref = oData.userReservations.preferences;
+            /*for(var pr in lv_pref){
+            	if(lv_pref[pr].entityType==="S"){
+            		
+            	}
+            }*/
 			var week = 1;
 			//Loop to read reservation data and match the same
             for(var i=0;i<30;i++)

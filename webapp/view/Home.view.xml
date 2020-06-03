@@ -19,7 +19,9 @@
 									width="10%"
 									press="onPressPrevious"
 									icon=""/> 
-							<Button	text="{i18n>locationButtonText}" 
+							<Button	text="{
+												path: 'global>/currentLocation'
+											}" 
 									class="sapUiResponsiveMargin"
 									width="60%"
 									press="onSelectLocationButton"/>
