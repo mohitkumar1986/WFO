@@ -52,6 +52,7 @@
 																		path: 'screenMock>status',
 																		formatter: '.formatter.infoState'
 																	}"
+														infoStateInverted: "true"  
 														class="sapUiResponsiveMargin"/>
 								</items>
 							</List>
