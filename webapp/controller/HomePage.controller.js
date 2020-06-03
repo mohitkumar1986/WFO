@@ -35,11 +35,15 @@ sap.ui.define([
 			var oBinding = this.byId("myList").getBinding("items");
 			var prevWeek = parseInt(oBinding.aFilters[0].oValue1,10);
 			prevWeek -= 1;
-			oBinding.filter(new sap.ui.model.Filter("week", "EQ", prevWeek)); 
+			if (prevWeek===0){
+				MessageToast.show("First Page Reached");	
+			}else{
+				oBinding.filter(new sap.ui.model.Filter("week", "EQ", prevWeek)); 
+			}
 		},
 		onSelectionChange: function (oEvent) {
 			var selectedList = this.getView().byId("myList").getSelectedItems();
-			for(var sel in selectedList ){
+			for( var sel in selectedList ){
 				var mock = this.getView().getModel("mock");
 				var key = selectedList[sel].mProperties.title;
 			}
