@@ -21,7 +21,7 @@ sap.ui.define([
 		},
 		createLocationModel: function (componentRef) {
 			
-			var baseurl = "https://bookercrud.azurewebsites.net/api/locations";
+			var baseurl = "https://bookercrud.azurewebsites.net/api/masterdata";
 
 			/*var oModel = new sap.ui.model.json.JSONModel();
 			$.ajax({

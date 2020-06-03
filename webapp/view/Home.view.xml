@@ -1,10 +1,11 @@
 <mvc:View	xmlns:mvc="sap.ui.core.mvc" 
 			xmlns="sap.m" 
-			controllerName="WSR.WorkspaceReservation.controller.HomePage" 
+			controllerName="WSR.WorkspaceReservation.controller.Home" 
 			displayBlock="true">
 	<Shell id="shell">
-		<App id="app">
-				<!--<Page	id="page" 
+		<App id="home">
+			<pages>
+				<Page	id="page" 
 						title="{i18n>title}" titleAlignment="Center" titleLevel="H6"
 						tooltip="Web App for Reserving your Seat in Office">
 					<headerContent>
@@ -57,7 +58,8 @@
 								</items>
 							</List>
 					</content>
-				</Page>-->
+				</Page>
+			</pages>
 		</App>
 	</Shell>
 </mvc:View>

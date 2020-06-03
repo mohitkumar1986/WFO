@@ -85,11 +85,12 @@
 				"target": "TargetView2"
 			}],
 			"targets": {
+
 				"TargetView1": {
 					"viewType": "XML",
 					"transition": "slide",
 					"clearControlAggregation": false,
-					"viewName": "HomePage"
+					"viewName": "Home"
 				},
 				"TargetView2": {
 					"viewName": "SelectLocation"
