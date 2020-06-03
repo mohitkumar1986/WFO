@@ -29,14 +29,15 @@
 									press="onPressNext"/>
 						</Panel>
 							<List	id		="myList"
-									mode	="MultiSelect"
+									mode	="SingleSelectMaster"
 									class	="sapUiResponsiceMargin"
 									selectionChange = "onSelectionChange"
 									items	="{
 													path: 'screenMock>/screenReservation'
 											  }">
 								<items>
-									<StandardListItem	title="{
+									<StandardListItem	
+														title="{
 																	path: 'screenMock>day',
 																	formatter: '.formatter.displayDate'
 																}"
@@ -52,7 +53,7 @@
 																		path: 'screenMock>status',
 																		formatter: '.formatter.infoState'
 																	}"
-														infoStateInverted: "true"  
+														infoStateInverted="true"  
 														class="sapUiResponsiveMargin"/>
 								</items>
 							</List>
