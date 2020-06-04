@@ -35,7 +35,7 @@ sap.ui.define([
 			//var ocity_bnd = this.byId("city").getBinding("items");
 			var obld_bnd = this.byId("buildings").getBinding("items");
 			var oflr_bnd = this.byId("floors").getBinding("items");
-			var ost_bnd = this.byId("seats").getBinding("items");
+			var ost_bnd  = this.byId("seats").getBinding("items");
 			obld_bnd.filter(new sap.ui.model.Filter("lid","EQ",oSelectedCity));
 			oflr_bnd.filter(new sap.ui.model.Filter("bid","EQ",oSelectedBld));
 			ost_bnd.filter(new sap.ui.model.Filter("fid","EQ",oSelectedflr));
@@ -83,17 +83,21 @@ sap.ui.define([
 		selectLocation: function () {
 			//	var sRecipient = this.getView().getModel().getProperty("/recipient");
 			//	MessageToast.show("sRecipient: " + sRecipient);
-			var oSelectedst = this.byId("seats")._getSelectedItemText();
+			var oSelectedst   = this.byId("seats")._getSelectedItemText();
 			var oSelectedCity = this.byId("city")._getSelectedItemText();
-			var oSelectedbld = this.byId("buildings")._getSelectedItemText();
-			var oSelectedflr = this.byId("floors")._getSelectedItemText();
+			var oSelectedbld  = this.byId("buildings")._getSelectedItemText();
+			var oSelectedflr  = this.byId("floors")._getSelectedItemText();
+			var oSelectedstkey   = this.byId("seats").getSelectedKey();
+
 			if( oSelectedst==="" || oSelectedCity==="" || oSelectedbld==="" || oSelectedflr===""){
 				MessageToast.show("All Location fields are mandatory.");
 			}
 			else{
-				var searchButtonText = this.getOwnerComponent().getModel("global");
+				var searchButtonText = JSON.parse(this.getOwnerComponent().getModel("global").getJSON());
 				searchButtonText.currentLocation = oSelectedCity + " " + oSelectedbld + " " +  oSelectedflr + " " + oSelectedst;
-				this.getOwnerComponent().setModel(searchButtonText,"global");
+				searchButtonText.currentLocationId = oSelectedstkey;
+				var newModel = new JSONModel(searchButtonText);
+				this.getOwnerComponent().setModel(newModel,"global");
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				oRouter.navTo("RouteView1");
 			}

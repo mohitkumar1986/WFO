@@ -61,6 +61,7 @@ sap.ui.define([
             var lv_res = oData.userReservations.reservations;
             var lv_team_res = oData.userReservations.teamReservations;
             var lv_pref = oData.userReservations.preferences;
+            
             /*for(var pr in lv_pref){
             	if(lv_pref[pr].entityType==="S"){
             		
@@ -69,7 +70,7 @@ sap.ui.define([
 			var week = 1;
 			//Loop to read reservation data and match the same
             for(var i=0;i<30;i++)
-            {	
+            {	lv_colleagues = "";
             	dt=this.getFormattedDate(d);
                 lv_status = "Not Reserved";
                 for (var res in lv_res) 
@@ -77,20 +78,21 @@ sap.ui.define([
             	 	if(dt===lv_res[res].date)
             	 	{
                			lv_status="Reserved";
+               			lv_colleagues = "Location:" + lv_res[res].locationText;// + " " + "Team Members:";
                 	}                   
            		}
-                lv_colleagues = "";
-                for (var index in lv_team_res) 
+                
+                /*for (var index in lv_team_res) 
                 {
                 	var ind_res = lv_team_res[index].reservations;
 					for(var ind2 in ind_res )
 					{
                     	if( dt === ind_res[ind2].date ) 
                     	{
-               			lv_colleagues = lv_colleagues + lv_team_res[index].name + " ";
+               				lv_colleagues = lv_colleagues + lv_team_res[index].name + " ";
                 		}                 
                     }
-                }
+                }*/
 				//Append Data to Screen Reservations. 
                 screenReservation[screenReservation.length] = new this.append( dt, lv_status , lv_colleagues, week );
                 d = this.addDays(d,1);
@@ -102,6 +104,8 @@ sap.ui.define([
 			}
 			var scrOdata = { "screenReservation": screenReservation };
 			var screenMock = new JSONModel(scrOdata);
+			var oUserData = new JSONModel(oData);
+			component.setModel(oUserData,"userData");
 			return screenMock;
 		},
 		getMonday: function (d) {

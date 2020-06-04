@@ -19,7 +19,8 @@
 									width="10%"
 									press="onPressPrevious"
 									icon=""/> 
-							<Button	text="{
+							<Button	id="searchButton"
+									text="{
 												path: 'global>/currentLocation'
 											}" 
 									class="sapUiResponsiveMargin"
@@ -33,12 +34,14 @@
 							<List	id		="myList"
 									mode	="SingleSelectMaster"
 									class	="sapUiResponsiceMargin"
-									selectionChange = "onSelectionChange"
+									
+									itemPress="onItemPress"
 									items	="{
 													path: 'screenMock>/screenReservation'
 											  }">
 								<items>
 									<StandardListItem	
+														type="Active"
 														title="{
 																	path: 'screenMock>day',
 																	formatter: '.formatter.displayDate'
