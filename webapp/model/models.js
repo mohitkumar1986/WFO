@@ -78,11 +78,11 @@ sap.ui.define([
             	 	if(dt===lv_res[res].date)
             	 	{
                			lv_status="Reserved";
-               			lv_colleagues = "Location:" + lv_res[res].locationText;// + " " + "Team Members:";
+               			lv_colleagues = "Location:" + lv_res[res].locationText + " " + "Team Members:";
                 	}                   
            		}
                 
-                /*for (var index in lv_team_res) 
+                for (var index in lv_team_res) 
                 {
                 	var ind_res = lv_team_res[index].reservations;
 					for(var ind2 in ind_res )
@@ -92,7 +92,7 @@ sap.ui.define([
                				lv_colleagues = lv_colleagues + lv_team_res[index].name + " ";
                 		}                 
                     }
-                }*/
+                }
 				//Append Data to Screen Reservations. 
                 screenReservation[screenReservation.length] = new this.append( dt, lv_status , lv_colleagues, week );
                 d = this.addDays(d,1);
