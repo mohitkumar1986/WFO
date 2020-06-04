@@ -110,8 +110,8 @@ sap.ui.define([
 					    	{	
 					    		switch(xhttp.status){
 					    			case 200:
-					    				//var newModel = Model.createJSONMock(component);
-					    				//component.setModel(newModel,"screenMock");
+					    				/*var newModel = Model.createJSONMock(component);
+					    				component.setModel(newModel,"screenMock");*/
 					    				MessageToast.show("Seat" + " " + currentLocation.currentLocation + " " + "Booked Successfully");
 					    				oFlag = "S";
 					    				break;
@@ -147,8 +147,8 @@ sap.ui.define([
 						    		
 						    		switch(xhttp.status){
 						    			case 200:
-						    				//var newModel = Model.createJSONMock(component);
-					    					//component.setModel(newModel,"screenMock");
+						    				/*var newModel = Model.createJSONMock(component);
+					    					component.setModel(newModel,"screenMock");*/
 						    				MessageToast.show("Booking Cancelled Successfully");
 						    				
 						    				break;
