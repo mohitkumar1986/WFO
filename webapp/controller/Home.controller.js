@@ -111,7 +111,7 @@ sap.ui.define([
 					    		switch(xhttp.status){
 					    			case 200:
 					    				/*var newModel = Model.createJSONMock(component);
-					    				component.setModel(newModel,"screenMock");*/
+					    				var screenmodel = component.getModel("screenMock");*/
 					    				MessageToast.show("Seat" + " " + currentLocation.currentLocation + " " + "Booked Successfully");
 					    				oFlag = "S";
 					    				break;
@@ -141,7 +141,13 @@ sap.ui.define([
 								oFlag = "S";
 								xhttp.open("DELETE",baseurl, false);
 								xhttp.setRequestHeader("Access-Control-Allow-Methods","*");
-	    						xhttp.send(body);
+								try{
+	    							xhttp.send(body);
+								}
+								catch(err){
+									MessageToast.show("Cross Origin Exception");		
+								}
+	    						
 	    						if (xhttp.readyState === 4) 
 						    	{	
 						    		
