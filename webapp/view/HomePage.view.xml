@@ -4,6 +4,7 @@
 			displayBlock="true">
 	<Shell id="shell">
 		<App id="app">
+				<mvc:XMLView id="homeView" viewName="WSR.WorkspaceReservation.view.Home"/>
 				<!--<Page	id="page" 
 						title="{i18n>title}" titleAlignment="Center" titleLevel="H6"
 						tooltip="Web App for Reserving your Seat in Office">

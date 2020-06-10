@@ -12,9 +12,7 @@ sap.ui.define([
 			return oModel;
 		},
 		createGlobalData: function() {
-
 			var oData	= {currentLocation: "Click to Search & Select Location"};
-
 			var oModel = new JSONModel(oData);
 			return oModel;
 		},
