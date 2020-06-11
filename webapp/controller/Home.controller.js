@@ -85,6 +85,7 @@ sap.ui.define([
     		// fire the XHR request
 	    	var xhttp = new XMLHttpRequest();	
 	    	var component = this.getOwnerComponent();
+	    	var oBinding = this.byId("myList").getBinding("items");
 			var dt = Model.getFormattedDate(new Date(selectedItem));
 			// set the XHR request parameters
 	    		
@@ -110,8 +111,14 @@ sap.ui.define([
 					    	{	
 					    		switch(xhttp.status){
 					    			case 200:
-					    				/*var newModel = Model.createJSONMock(component);
-					    				var screenmodel = component.getModel("screenMock");*/
+					    				var newModel = Model.createJSONMock(component);
+					    				var screenmodel = component.getModel("screenMock");
+					    				screenmodel.oData.screenReservation = [];
+					    				for(res in newModel.oData.screenReservation){
+					    					screenmodel.oData.screenReservation.push(newModel.oData.screenReservation[res]);
+					    				}
+					    				screenmodel.refresh();
+					    				oBinding.refresh();
 					    				MessageToast.show("Seat" + " " + currentLocation.currentLocation + " " + "Booked Successfully");
 					    				oFlag = "S";
 					    				break;
@@ -155,6 +162,14 @@ sap.ui.define([
 						    			case 200:
 						    				/*var newModel = Model.createJSONMock(component);
 					    					component.setModel(newModel,"screenMock");*/
+					    					var newModel = Model.createJSONMock(component);
+					    					var screenmodel = component.getModel("screenMock");
+					    					screenmodel.oData.screenReservation = [];
+					    					for(res in newModel.oData.screenReservation){
+					    						screenmodel.oData.screenReservation.push(newModel.oData.screenReservation[res]);
+					    					}
+					    					screenmodel.refresh();
+					    					oBinding.refresh();
 						    				MessageToast.show("Booking Cancelled Successfully");
 						    				
 						    				break;
